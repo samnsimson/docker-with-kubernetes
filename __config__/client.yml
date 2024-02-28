@@ -17,3 +17,19 @@ spec:
       containers:
       - name: client
         image: samnsimson/docker-compose-learning-client:latest
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: client
+spec:
+  type: NodePort
+  selector:
+    app: client
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 31000
