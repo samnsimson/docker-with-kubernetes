@@ -1,4 +1,6 @@
 version: '3'
+
+
 services:
   client:
     container_name: client
@@ -6,26 +8,44 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - 80:80
+      - 3000:3000
     depends_on:
       - server
     volumes:
-      - /app/node_modules
       - ./client:/app
     networks:
       - webapp
+
+
   server:
     container_name: server
     build:
       context: ./server
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 4000:4000
     volumes:
-      - /app/node_modules
       - ./server:/app
     networks:
       - webapp
+
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    depends_on:
+      - client
+      - server
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - webapp
+
+      
 networks:
   webapp:
     driver: bridge

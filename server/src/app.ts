@@ -8,11 +8,11 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
-const port = 3000;
+const port = 4000;
 
 socket(io);
 
-app.use("/", indexRouter);
+app.use("/api", indexRouter);
 
 server.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);

@@ -11,6 +11,7 @@ const socket = (io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap,
         const { clientid } = socket.handshake.query;
         clients.set(clientid, socket);
         socket.join(room);
+        socket.emit("MESSAGE", { pid: process.pid, message: "Welcome!" });
         socket.on("disconnect", () => {
             clients.delete(clientid);
             socket.to(room).emit("MESSAGE", "Client disconnected");

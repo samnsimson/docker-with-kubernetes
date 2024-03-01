@@ -5,8 +5,8 @@
     "main": "dist/app.js",
     "scripts": {
         "dev": "nodemon ./src/app.ts",
-        "start": "tsc && node dist/app.js",
         "build": "tsc",
+        "start": "tsc && pm2-runtime start ./dist/app.js -i 0 --name socker-server",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .ts"
     },
@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "express": "^4.17.1",
+        "pm2": "^5.3.1",
         "socket.io": "^4.7.4"
     }
 }
