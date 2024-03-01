@@ -28,23 +28,6 @@ services:
       - ./server:/app
     networks:
       - webapp
-
-
-  nginx:
-    container_name: nginx
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - 8080:80
-    depends_on:
-      - client
-      - server
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-    networks:
-      - webapp
-
       
 networks:
   webapp:
