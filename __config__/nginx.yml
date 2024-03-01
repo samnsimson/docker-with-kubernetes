@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: server-deployment
+  name: nginx-deployment
   labels:
-    app: server
+    app: nginx
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: server
+      app: nginx
   template:
     metadata:
       labels:
-        app: server
+        app: nginx
     spec:
       containers:
-      - name: server
-        image: samnsimson/docker-compose-learning-server:latest
+      - name: nginx
+        image: samnsimson/docker-compose-learning-nginx:latest
         resources:
           limits:
             memory: 512Mi
@@ -30,13 +30,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: server
+  name: nginx
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
-    app: server
+    app: nginx
   ports:
     - protocol: TCP
-      port: 4000
-      targetPort: 4000
-      nodePort: 30200
+      port: 8080
+      targetPort: 80
+      nodePort: 30300

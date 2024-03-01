@@ -6,8 +6,8 @@
     "scripts": {
         "dev": "nodemon ./src/app.ts",
         "build": "tsc",
-        "start": "tsc && node ./dist/app.js",
-        "start:pm2": "tsc && npm run pm2",
+        "start": "node ./dist/app.js",
+        "start:pm2": "npm run pm2",
         "pm2": "pm2-runtime start ./dist/app.js -i 0 --name socker-server",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .ts"
